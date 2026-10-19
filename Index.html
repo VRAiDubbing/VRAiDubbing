@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VR AI Dubbing</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: white;
+}
+
+header {
+    padding: 20px;
+    background: #111a30;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #263654;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #64e5ff;
+}
+
+.badge {
+    background: #16354a;
+    color: #64e5ff;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.hero {
+    text-align: center;
+    padding: 45px 18px 25px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    line-height: 1.25;
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    color: #64e5ff;
+}
+
+.hero p {
+    color: #b7c2d8;
+    line-height: 1.7;
+    max-width: 550px;
+    margin: auto;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: #131d33;
+    border: 1px solid #2a3b5d;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.muted {
+    color: #a9b7cf;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.upload {
+    display: block;
+    margin-top: 20px;
+    padding: 30px 15px;
+    text-align: center;
+    border: 2px dashed #3c628a;
+    border-radius: 14px;
+    background: #0d1629;
+}
+
+.upload input {
+    width: 100%;
+    margin-top: 20px;
+    color: white;
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    color: #dbe7ff;
+    font-size: 14px;
+}
+
+select, button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+select {
+    background: #0b1427;
+    color: white;
+    border: 1px solid #344969;
+}
+
+button {
+    background: linear-gradient(90deg, #36c5f0, #7275ff);
+    color: #07101d;
+    font-weight: bold;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .5;
+}
+
+.status {
+    display: none;
+    background: #0d1629;
+    border: 1px solid #344969;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 18px;
+    overflow-wrap: anywhere;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.feature {
+    padding: 16px 12px;
+    border-radius: 12px;
+    background: #0d1629;
+    border: 1px solid #253653;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+footer {
+    text-align: center;
+    color: #8e9db7;
+    padding: 25px 15px;
+    font-size: 13px;
+}
+
+@media (max-width: 420px) {
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎬 VR AI Dubbing</div>
+    <div class="badge">AI STUDIO</div>
+</header>
+
+<section class="hero">
+    <h1>Your Video,<br><span>Your Language!</span></h1>
+
+    <p>
+        Translate and dub your videos into Hindi.
+        Create multilingual videos with the power of AI.
+    </p>
+</section>
+
+<main class="container">
+
+    <section class="card">
+        <h2>🎥 Create New Dubbing</h2>
+
+        <p class="muted">
+            Upload a video and select its original language
+            and the language you want to translate into.
+        </p>
+
+        <form id="dubbingForm">
+
+            <label for="video">Upload Your Video</label>
+
+            <div class="upload">
+                <div style="font-size:36px">📁</div>
+                <p style="margin-top:10px">
+                    Choose a video from your device
+                </p>
+
+                <input
+                    type="file"
+                    id="video"
+                    accept="video/*"
+                    required
+                >
+            </div>
+
+            <label for="source">Original Language</label>
+
+            <select id="source">
+                <option value="zh">Chinese</option>
+                <option value="ko">Korean</option>
+                <option value="en">English</option>
+                <option value="ja">Japanese</option>
+            </select>
+
+            <label for="target">Dubbing Language</label>
+
+            <select id="target">
+                <option value="hi">Hindi</option>
+                <option value="en">English</option>
+            </select>
+
+            <label for="voice">AI Voice Preference</label>
+
+            <select id="voice">
+                <option value="female">Female Voice</option>
+                <option value="male">Male Voice</option>
+            </select>
+
+            <button type="submit" id="submitBtn">
+                🚀 Start AI Dubbing
+            </button>
+
+            <div class="status" id="status"></div>
+
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>✨ Features</h2>
+
+        <div class="features">
+            <div class="feature">
+                🌐<br>
+                <strong>AI Translation</strong><br>
+                <span class="muted">Translate dialogues</span>
+            </div>
+
+            <div class="feature">
+                🎙️<br>
+                <strong>AI Voice</strong><br>
+                <span class="muted">Generate speech</span>
+            </div>
+
+            <div class="feature">
+                💋<br>
+                <strong>Lip Sync</strong><br>
+                <span class="muted">Synchronize dialogue</span>
+            </div>
+
+            <div class="feature">
+                📝<br>
+                <strong>Subtitles</strong><br>
+                <span class="muted">Create subtitles</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    VR AI Dubbing © 2026<br>
+    AI-powered video translation studio
+</footer>
+
+<script>
+const form = document.getElementById("dubbingForm");
+const videoInput = document.getElementById("video");
+const statusBox = document.getElementById("status");
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const file = videoInput.files[0];
+
+    if (!file) {
+        alert("Please select a video first.");
+        return;
+    }
+
+    const maxSize = 100 * 1024 * 1024;
+
+    if (file.size > maxSize) {
+        statusBox.style.display = "block";
+        statusBox.textContent =
+            "This demo accepts files up to 100 MB. " +
+            "Actual server upload will be added later.";
+        return;
+    }
+
+    statusBox.style.display = "block";
+    statusBox.textContent =
+        "Video selected: " + file.name +
+        "\n\nSource language: " +
+        document.getElementById("source").selectedOptions[0].text +
+        "\nTarget language: " +
+        document.getElementById("target").selectedOptions[0].text +
+        "\nVoice: " +
+        document.getElementById("voice").selectedOptions[0].text +
+        "\n\nThis is the first UI demo. AI processing is not connected yet.";
+});
+</script>
+
+</body>
+                                                     </html>
